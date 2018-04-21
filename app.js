@@ -19,7 +19,7 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, '/public')));
 app.use(function (req, res, next) {
 
     // Website you wish to allow to connect
@@ -40,10 +40,10 @@ app.use(function (req, res, next) {
 });
 app.use(
     connection(mysql, {
-        host: 'localhost',
-        user: 'root',
-        password: '',
-        database: 'toctoc',
+        host: 'fdb21.awardspace.net',
+        user: '2704416_toctoc',
+        password: 'toctoc123',
+        database: '2704416_toctoc',
         port: 3306
     }, 'pool') //or single
 );
