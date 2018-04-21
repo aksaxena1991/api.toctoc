@@ -8,6 +8,7 @@ var cors = require('cors');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var roles = require('./routes/roles');
+var profile = require('./routes/profile');
 var auth = require('./routes/auth');
 var categories = require('./routes/categories');
 var products = require('./routes/products');
@@ -32,6 +33,14 @@ app.use(
 app.get('/api/auth/verify', auth.verify);
 app.get('/api/auth/login', auth.login);
 // Authentication End
+// Profile Start
+app.get('/api/profile/allProfiles', profile.allProfiles);
+app.get('/api/profile/profileByRegId', profile.profileByRegId);
+app.post('/api/profile/addProfile', profile.addProfile);
+app.put('/api/profile/updateProfile', profile.updateProfile);
+app.delete('/api/profile/deleteProfile', profile.deleteProfile);
+
+// Profile End
 // Coupons Start
 app.get('/api/coupons/allCoupons', coupons.allCoupons);
 app.post('/api/coupons/addCoupon', coupons.addCoupon);
