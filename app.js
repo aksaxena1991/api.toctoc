@@ -40,16 +40,13 @@ app.use(function (req, res, next) {
 });
 app.use(
     connection(mysql, {
-        host: 'localhost',
-        user: 'root',
-        password: '',
-        database: 'toctoc',
+        host: 'fdb21.awardspace.net',
+        user: '2704416_toctoc',
+        password: 'toctoc123',
+        database: '2704416_toctoc',
         port: 3306
     }, 'pool') //or single
 );
-app.get('/', function (req, res) {
-    res.json({"message": "Welcome to Toctoc application. Take order quickly. Organize and keep track of all your orders."});
-});
 // Authentication Start
 app.get('/api/auth/verify', auth.verify);
 app.get('/api/auth/login', auth.login);

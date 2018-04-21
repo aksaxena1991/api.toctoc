@@ -16,7 +16,7 @@ exports.allRoles = function (req, res) {
                                 var rowObj = rows[index];
                                 data.push(rowObj);
                             }
-                            res.status(200).json({
+                            res.status(200).send({
                                 "code": 200,
                                 "message": "Roles are found.",
                                 "data": data
