@@ -10,6 +10,7 @@ var roles = require('./routes/roles');
 var auth = require('./routes/auth');
 var categories = require('./routes/categories');
 var products = require('./routes/products');
+var coupons = require('./routes/coupons');
 var app = express();
 app.use(logger('dev'));
 app.use(bodyParser.json());
@@ -29,6 +30,12 @@ app.use(
 app.get('/api/auth/verify', auth.verify);
 app.get('/api/auth/login', auth.login);
 // Authentication End
+// Coupons Start
+app.get('/api/coupons/allCoupons', coupons.allCoupons);
+app.post('/api/coupons/addCoupon', coupons.addCoupon);
+app.put('/api/coupons/updateCoupon', coupons.updateCoupon);
+app.delete('/api/coupons/deleteCoupon', coupons.deleteCoupon);
+// Coupons End
 // Roles Start
 app.get('/api/roles/allRoles', roles.allRoles);
 app.post('/api/roles/addRole', roles.addRole);
