@@ -1,4 +1,4 @@
-exports.allCoupons = function (req, res) {
+allCoupons.allCoupons = function (req, res) {
     try {
         req.getConnection(function (err, connection) {
             if (err) {
@@ -39,7 +39,7 @@ exports.allCoupons = function (req, res) {
     }
 
 }
-exports.addCoupon = function (req, res) {
+allCoupons.addCoupon = function (req, res) {
     try {
         var params = req.body;
         req.getConnection(function (err, connection) {
@@ -75,7 +75,7 @@ exports.addCoupon = function (req, res) {
         console.log("we caught an exception ", ex);
     }
 }
-exports.updateCoupon = function (req, res) {
+allCoupons.updateCoupon = function (req, res) {
     try {
         var params = req.body;
 
@@ -118,7 +118,7 @@ exports.updateCoupon = function (req, res) {
         console.log("we caught an exception ", ex);
     }
 }
-exports.deleteCoupon = function (req, res) {
+allCoupons.deleteCoupon = function (req, res) {
     try {
         var params = req.body;
 
