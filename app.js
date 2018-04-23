@@ -14,7 +14,7 @@ var categories = require('./routes/categories');
 var products = require('./routes/products');
 var coupons = require('./routes/coupons');
 var app = express();
-// app.use(cors());
+app.use(cors());
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
@@ -40,10 +40,10 @@ app.use(function (req, res, next) {
 });
 app.use(
     connection(mysql, {
-        host: 'fdb21.awardspace.net',
-        user: '2704416_toctoc',
-        password: 'toctoc123',
-        database: '2704416_toctoc',
+        host: 'localhost',
+        user: 'root',
+        password: '',
+        database: 'toctoc',
         port: 3306
     }, 'pool') //or single
 );

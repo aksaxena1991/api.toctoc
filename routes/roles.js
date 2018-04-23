@@ -42,7 +42,7 @@ exports.allRoles = function (req, res) {
 exports.addRole = function (req, res) {
     try {
         var requestParams = req.body;
-        // console.log(req);
+
         req.getConnection(function (err, connection) {
             if (err) {
                 console.log("SQL Connection: ", err);
