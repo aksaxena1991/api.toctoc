@@ -205,8 +205,7 @@ exports.updateCategory = function (req, res) {
 }
 exports.deleteCategory = function (req, res) {
     try {
-        var requestParams = req.body;
-
+        var requestParams = req.query;
         var category_id = requestParams.category_id;
         req.getConnection(function (err, connection) {
             if (err) {
