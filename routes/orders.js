@@ -149,7 +149,7 @@ exports.updateOrder = function (req, res) {
         console.log("we caught an exception ", ex);
     }
 }
-exports.deleteStore = function (req, res) {
+exports.deleteOrder = function (req, res) {
     try {
         var params = req.body;
 

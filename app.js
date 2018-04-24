@@ -13,6 +13,10 @@ var auth = require('./routes/auth');
 var categories = require('./routes/categories');
 var products = require('./routes/products');
 var coupons = require('./routes/coupons');
+var order = require('./routes/orders');
+var orderDetails = require('./routes/order-details');
+var store = require('./routes/store');
+var storeDetails = require('./routes/store-details');
 var app = express();
 app.use(cors());
 app.use(logger('dev'));
@@ -86,6 +90,29 @@ app.put('/api/products/updateProduct', products.updateProduct);
 app.post('/api/products/addProduct', products.addProduct);
 app.delete('/api/products/deleteProduct', products.deleteProduct);
 // Products end
+// Orders Start
+app.get('/api/orders/allOrders', order.allOrders);
+app.post('/api/orders/addOrder', order.addOrder);
+app.put('/api/orders/updateOrder', order.updateOrder);
+app.delete('/api/orders/deleteOrder', order.deleteOrder);
+// Orders End
+// Order Details Start
+app.get('/api/order-details/allOrderDetails', orderDetails.allOrderDetails);
+app.post('/api/order-details/addOrderDetails', orderDetails.addOrderDetails);
+app.put('/api/order-details/updateOrderDetails', orderDetails.updateOrderDetails);
+app.delete('/api/order-details/deleteOrderDetails', orderDetails.deleteOrderDetails);
+// Order Details End
+// Store Start
+app.post('/api/store/addStore', store.addStore);
+app.get('/api/store/allStores', store.allStores);
+app.delete('/api/store/deleteStore', store.deleteStore);
+app.put('/api/store/updateStore', store.updateStore);
+// Store End
+// Sore Detail Start
+app.post('/api/store-detail/addStoreDetail', storeDetails.addStoreDetail);
+app.delete('/api/store-detail/deleteStoreDetail', storeDetails.deleteStoreDetail);
+app.put('/api/store-detail/updateStoreDetail', storeDetails.updateStoreDetail);
+// Sore Detail End
 app.use(function (req, res, next) {
     var err = new Error('Not Found');
     err.status = 404;
