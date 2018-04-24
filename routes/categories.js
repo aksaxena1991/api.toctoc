@@ -1,3 +1,7 @@
+var multer = require('multer');
+var upload = multer({
+    dest: 'uploads/'
+}).single('category_image');
 exports.allCategories = function (req, res) {
     try {
         req.getConnection(function (err, connection) {
@@ -49,12 +53,12 @@ exports.allCategoryByParentAndStoreId = function (req, res) {
                 console.log("SQL Connection: ", err);
             }
             else {
-                connection.query('Select * from category where parent_category_id = ? && store_id = ? ',[parent_category_id, store_id], function (error, rows) {
+                connection.query('Select * from category where parent_category_id = ? && store_id = ? ', [parent_category_id, store_id], function (error, rows) {
                     if (error) {
                         console.log("Error wile executing query ", error);
                     }
                     else {
-                       if (rows.length > 0) {
+                        if (rows.length > 0) {
                             var data = [];
                             for (var index in rows) {
                                 var rowObj = rows[index];
@@ -93,7 +97,7 @@ exports.allCategoryByStoreId = function (req, res) {
                 console.log("SQL Connection: ", err);
             }
             else {
-                connection.query('Select * from category where  store_id = ? ',[ store_id], function (error, rows) {
+                connection.query('Select * from category where  store_id = ? ', [store_id], function (error, rows) {
                     if (error) {
                         console.log("Error wile executing query ", error);
                     }
@@ -129,34 +133,46 @@ exports.allCategoryByStoreId = function (req, res) {
 }
 exports.addCategory = function (req, res) {
     try {
-        var requestParams = req.body;
-        req.getConnection(function (err, connection) {
+        var requestParams = req;
+        upload(req, res, function (err) {
             if (err) {
-                console.log("SQL Connection: ", err);
+                res.status(405).send({
+                    "code": 405,
+                    "message": "Unable to upload image."
+                });
             }
             else {
-                var query = "INSERT INTO category SET ?";
-                var values = {
-                    "parent_category_id": requestParams.parent_category_id,
-                    "category_name": requestParams.category_name,
-                    "category_description": requestParams.category_description,
-                    "category_image": requestParams.category_image,
-                    "store_id": requestParams.store_id
-                };
-                connection.query(query, values, function (error, result) {
-                    if (error) {
-                        console.log("Error wile executing query ", error);
+                req.getConnection(function (err, connection) {
+                    if (err) {
+                        console.log("SQL Connection: ", err);
                     }
                     else {
-                        res.status(200).send({
-                            "code": 200,
-                            "message": "A new category has been added."
-                        });
+                        var query = "INSERT INTO category SET ?";
+                        var values = {
+                            "parent_category_id": requestParams.parent_category_id,
+                            "category_name": requestParams.category_name,
+                            "category_description": requestParams.category_description,
+                            "category_image": requestParams.category_image,
+                            "store_id": requestParams.store_id
+                        };
+                        console.log(requestParams);
+                        connection.query(query, values, function (error, result) {
+                            if (error) {
+                                console.log("Error wile executing query ", error);
+                            }
+                            else {
+                                res.status(200).send({
+                                    "code": 200,
+                                    "message": "A new category has been added."
+                                });
 
+                            }
+                        });
                     }
                 });
             }
         });
+
     }
     catch (ex) {
         console.log("we caught an exception ", ex);
